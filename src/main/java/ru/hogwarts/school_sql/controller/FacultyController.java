@@ -51,4 +51,9 @@ public class FacultyController {
         List<Faculty> faculties = service.findByColor(color);
         return ResponseEntity.ok(faculties);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<Faculty>> findFacultiesByNameOrColor(@RequestParam String query){
+        final List<Faculty> faculties = service.findByNameOrColor(query);
+        return ResponseEntity.ok(faculties);
+    }
 }

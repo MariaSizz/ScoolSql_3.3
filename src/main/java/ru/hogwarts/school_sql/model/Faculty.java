@@ -1,6 +1,9 @@
 package ru.hogwarts.school_sql.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "faculty")
@@ -10,6 +13,9 @@ public class Faculty {
     private Long id;
     private String name;
     private String color;
+    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Student> students;
     public Faculty() {
     }
     public Faculty(Long id, String name, String color) {
@@ -40,5 +46,13 @@ public class Faculty {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }
