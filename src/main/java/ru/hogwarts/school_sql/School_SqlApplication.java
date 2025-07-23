@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @OpenAPIDefinition
 @SpringBootApplication
-public class SchoolSql2Application {
+public class School_SqlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SchoolSql2Application.class, args);
+		SpringApplication.run(School_SqlApplication.class, args);
 	}
 
 }
