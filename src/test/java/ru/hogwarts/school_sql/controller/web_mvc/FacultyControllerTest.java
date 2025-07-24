@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.hogwarts.school_sql.controller.FacultyController;
 import ru.hogwarts.school_sql.model.Faculty;
-import ru.hogwarts.school_sql.model.Student;
 import ru.hogwarts.school_sql.service.FacultyService;
 
 import java.util.List;
@@ -151,44 +150,7 @@ class FacultyControllerTest {
                 .andExpect(jsonPath("$[0].color").value("red"));
     }
 
-    //TODO Оставил в виде комментария, не нашел в сервисе метода, где мы получаем всех студентов у выбранного факультета
-//    @Test
-//    void shouldReturnFacultyStudentsSuccessfully() throws Exception {
-//        List<Student> expectedStudents = List.of(createTestStudent());
-//
-//        when(facultyService.getFacultyStudents(1L)).thenReturn(expectedStudents);
-//
-//        mockMvc.perform(MockMvcRequestBuilders
-//                        .get("/faculty/{id}/students", 1L))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.length()").value(1))
-//                .andExpect(jsonPath("$[0].name").value("Harry Potter"))
-//                .andExpect(jsonPath("$[0].age").value(17));
-//    }
-
-    //TODO Оставил в виде комментария, не нашел в сервисе метода, где мы получаем всех студентов у выбранного факультета
-//    @Test
-//    void shouldReturnNotFoundWhenFacultyHasNoStudents() throws Exception {
-//        when(facultyService.getFacultyStudents(1L)).thenReturn(null);
-//
-//        mockMvc.perform(MockMvcRequestBuilders
-//                        .get("/faculty/{id}/students", 1L))
-//                .andExpect(status().isNotFound());
-//    }
-
     private Faculty createTestFaculty() {
-        Faculty faculty = new Faculty();
-        faculty.setId(1L);
-        faculty.setName("Gryffindor");
-        faculty.setColor("red");
-        return faculty;
-    }
-
-    private Student createTestStudent() {
-        Student student = new Student();
-        student.setId(1L);
-        student.setName("Harry Potter");
-        student.setAge(17);
-        return student;
+        return new Faculty(1L,"Gryffindor","red");
     }
 }

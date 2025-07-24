@@ -48,7 +48,6 @@ class FacultyControllerTest {
     void shouldCreateFacultySuccessfully() {
         Faculty inputFaculty = createTestFaculty();
         Faculty expectedFaculty = createTestFaculty();
-
         when(facultyService.createFaculty(any(Faculty.class))).thenReturn(expectedFaculty);
 
         ResponseEntity<Faculty> response = restTemplate.postForEntity(
@@ -67,7 +66,6 @@ class FacultyControllerTest {
     @Test
     void shouldReturnFacultyByIdSuccessfully() {
         Faculty expectedFaculty = createTestFaculty();
-
         when(facultyService.findFaculty(1L)).thenReturn(expectedFaculty);
 
         ResponseEntity<Faculty> response = restTemplate.getForEntity(
@@ -97,7 +95,6 @@ class FacultyControllerTest {
     void shouldUpdateFacultySuccessfully() {
         Faculty updatedFaculty = createTestFaculty();
         updatedFaculty.setColor("blue");
-
         when(facultyService.editFaculty(any(Faculty.class))).thenReturn(updatedFaculty);
 
         HttpEntity<Faculty> requestEntity = new HttpEntity<>(updatedFaculty);
@@ -116,7 +113,6 @@ class FacultyControllerTest {
     @Test
     void shouldReturnBadRequestWhenUpdatingNonExistentFaculty() {
         Faculty faculty = createTestFaculty();
-
         when(facultyService.editFaculty(any(Faculty.class))).thenReturn(null);
 
         HttpEntity<Faculty> requestEntity = new HttpEntity<>(faculty);
@@ -133,7 +129,6 @@ class FacultyControllerTest {
     @Test
     void shouldDeleteFacultySuccessfully() {
         Faculty deletedFaculty = createTestFaculty();
-
         when(facultyService.deleteFaculty(1L)).thenReturn(deletedFaculty);
 
         ResponseEntity<Faculty> response = restTemplate.exchange(
@@ -165,7 +160,6 @@ class FacultyControllerTest {
     @Test
     void shouldFilterFacultiesByColorSuccessfully() {
         List<Faculty> expectedFaculties = List.of(createTestFaculty());
-
         when(facultyService.findByColor("red")).thenReturn(expectedFaculties);
 
         ResponseEntity<List<Faculty>> response = restTemplate.exchange(
@@ -185,7 +179,6 @@ class FacultyControllerTest {
     @Test
     void shouldSearchFacultiesByNameOrColorSuccessfully() {
         List<Faculty> expectedFaculties = List.of(createTestFaculty());
-
         when(facultyService.findByNameOrColor("red")).thenReturn(expectedFaculties);
 
         ResponseEntity<List<Faculty>> response = restTemplate.exchange(
@@ -201,39 +194,11 @@ class FacultyControllerTest {
         assertThat(response.getBody()).hasSize(1);
     }
 
-    //TODO Оставил в виде комментария, не нашел в сервисе метод, где мы получаем всех студентов у выбранного факультета
-//    @Test
-//    void shouldReturnFacultyStudentsSuccessfully() {
-//        List<Student> expectedStudents = List.of(createTestStudent());
-//
-//        when(facultyService.getFacultyStudents(1L)).thenReturn(expectedStudents);
-//
-//        ResponseEntity<List<Student>> response = restTemplate.exchange(
-//                createFacultyStudentsUrl(1L),
-//                HttpMethod.GET,
-//                null,
-//                new ParameterizedTypeReference<List<Student>>() {}
-//        );
-//
-//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        assertThat(response.getBody()).isNotNull();
-//        assertThat(response.getBody()).hasSize(1);
-//        assertThat(response.getBody().get(0).getName()).isEqualTo("Harry Potter");
-//    }
-
     private Faculty createTestFaculty() {
-        Faculty faculty = new Faculty();
-        faculty.setId(1L);
-        faculty.setName("Gryffindor");
-        faculty.setColor("red");
-        return faculty;
+        return new Faculty(1L,"Gryffindor","red");
     }
 
     private Student createTestStudent() {
-        Student student = new Student();
-        student.setId(1L);
-        student.setName("Harry Potter");
-        student.setAge(17);
-        return student;
+        return new Student(1L,"Harry Potter",17);
     }
 }

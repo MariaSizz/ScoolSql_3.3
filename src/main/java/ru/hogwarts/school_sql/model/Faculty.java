@@ -23,6 +23,12 @@ public class Faculty {
         this.name = name;
         this.color = color;
     }
+    public Faculty(Long id, String name, String color, Set<Student> students) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        this.students = students;
+    }
 
     public Long getId() {
         return id;

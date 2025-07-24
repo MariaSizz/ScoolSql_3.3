@@ -33,20 +33,15 @@ public class StudentControllerTest {
 
     @Test
     void shouldCreateStudentSuccessfully() throws Exception {
-        Faculty faculty = new Faculty();
-        Student student = new Student();
-        student.setId(1L);
-        student.setAge(18);
-        student.setName("Ivan");
-        student.setFaculty(faculty);
-        faculty.setId(2L);
-        faculty.setColor("red");
-        faculty.setName("sliz");
+        Faculty faculty = new Faculty(2L,"sliz","red");
+        Student student = new Student(1L,"Ivan",18,faculty);
         faculty.setStudents(Set.of(student));
         JSONObject userObject = new JSONObject();
         userObject.put("name", "Ivan");
         userObject.put("age", 18);
+
         when(studentService.createStudent(any(Student.class))).thenReturn(student);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/student")
                         .content(userObject.toString())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -57,20 +52,15 @@ public class StudentControllerTest {
     }
     @Test
     void shouldReturnStudentByIdSuccessfully() throws Exception {
-        Faculty faculty = new Faculty();
-        Student student = new Student();
-        student.setId(1L);
-        student.setAge(18);
-        student.setName("Ivan");
-        student.setFaculty(faculty);
-        faculty.setId(2L);
-        faculty.setColor("red");
-        faculty.setName("sliz");
+        Faculty faculty = new Faculty(2L,"sliz","red");
+        Student student = new Student(1L,"Ivan",18,faculty);
         faculty.setStudents(Set.of(student));
         JSONObject userObject = new JSONObject();
         userObject.put("name", "Ivan");
         userObject.put("age", 18);
+
         when(studentService.findStudent(any(Long.class))).thenReturn(student);
+
         mockMvc.perform(MockMvcRequestBuilders.get("/student/{id}",1L)
                         .content(userObject.toString())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -83,21 +73,16 @@ public class StudentControllerTest {
 
     @Test
     void shouldUpdateStudentSuccessfully() throws Exception {
-        Faculty faculty = new Faculty();
-        Student student = new Student();
-        student.setId(1L);
-        student.setAge(19);
-        student.setName("Sveta");
-        student.setFaculty(faculty);
-        faculty.setId(2L);
-        faculty.setColor("red");
-        faculty.setName("sliz");
+        Faculty faculty = new Faculty(2L,"sliz","red");
+        Student student = new Student(1L,"Sveta",19,faculty);
         faculty.setStudents(Set.of(student));
         JSONObject userObject = new JSONObject();
         userObject.put("name", "Sveta");
         userObject.put("age", 19);
         userObject.put("id", 1L);
+
         when(studentService.editStudent(any(Student.class))).thenReturn(student);
+
         mockMvc.perform(MockMvcRequestBuilders.put("/student")
                         .content(userObject.toString())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -109,21 +94,16 @@ public class StudentControllerTest {
     }
     @Test
     void shouldDeleteStudentSuccessfully() throws Exception {
-        Faculty faculty = new Faculty();
-        Student student = new Student();
-        student.setId(1L);
-        student.setAge(19);
-        student.setName("Sveta");
-        student.setFaculty(faculty);
-        faculty.setId(2L);
-        faculty.setColor("red");
-        faculty.setName("sliz");
+        Faculty faculty = new Faculty(2L,"sliz","red");
+        Student student = new Student(1L,"Sveta",19,faculty);
         faculty.setStudents(Set.of(student));
         JSONObject userObject = new JSONObject();
         userObject.put("name", "Sveta");
         userObject.put("age", 19);
         userObject.put("id", 1L);
+
         when(studentService.deleteStudent(any(Long.class))).thenReturn(student);
+
         mockMvc.perform(MockMvcRequestBuilders.delete("/student/{id}",1L)
                         .content(userObject.toString())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -135,21 +115,16 @@ public class StudentControllerTest {
     }
     @Test
     void shouldFilterStudentByAgeSuccessfully() throws Exception {
-        Faculty faculty = new Faculty();
-        Student student = new Student();
-        student.setId(1L);
-        student.setAge(19);
-        student.setName("Sveta");
-        student.setFaculty(faculty);
-        faculty.setId(2L);
-        faculty.setColor("red");
-        faculty.setName("sliz");
+        Faculty faculty = new Faculty(2L,"sliz","red");
+        Student student = new Student(1L,"Sveta",19,faculty);
         faculty.setStudents(Set.of(student));
         JSONObject userObject = new JSONObject();
         userObject.put("name", "Sveta");
         userObject.put("age", 19);
         userObject.put("id", 1L);
+
         when(studentService.findByAge(any(Integer.class))).thenReturn(List.of(student));
+
         mockMvc.perform(MockMvcRequestBuilders.get("/student/filter").param("age", "19")
                         .content(userObject.toString())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -204,17 +179,10 @@ public class StudentControllerTest {
     }
 
     private Faculty createTestFaculty() {
-        Faculty faculty = new Faculty();
-        faculty.setId(1L);
-        faculty.setName("sliz");
-        faculty.setColor("red");
-        return faculty;
+        return new Faculty(1L,"sliz","red");
     }
 
     private Student createTestStudent() {
-        Student student = new Student();
-        student.setName("Sveta");
-        student.setAge(19);
-        return student;
+        return new Student(1L,"Sveta",19);
     }
 }

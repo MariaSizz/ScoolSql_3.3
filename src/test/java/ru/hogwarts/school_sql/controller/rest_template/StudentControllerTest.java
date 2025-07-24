@@ -48,7 +48,6 @@ class StudentControllerTest {
     void shouldCreateStudentSuccessfully() {
         Student inputStudent = createTestStudent();
         Student expectedStudent = createTestStudent();
-
         when(studentService.createStudent(any(Student.class))).thenReturn(expectedStudent);
         when(studentRepository.save(any(Student.class))).thenReturn(expectedStudent);
 
@@ -68,7 +67,6 @@ class StudentControllerTest {
     @Test
     void shouldReturnStudentByIdSuccessfully() {
         Student expectedStudent = createTestStudent();
-
         when(studentService.findStudent(1L)).thenReturn(expectedStudent);
 
         ResponseEntity<Student> response = restTemplate.getForEntity(
@@ -99,7 +97,6 @@ class StudentControllerTest {
     void shouldUpdateStudentSuccessfully() {
         Student updatedStudent = createTestStudent();
         updatedStudent.setAge(18);
-
         when(studentService.editStudent(any(Student.class))).thenReturn(updatedStudent);
 
         HttpEntity<Student> requestEntity = new HttpEntity<>(updatedStudent);
@@ -118,7 +115,6 @@ class StudentControllerTest {
     @Test
     void shouldReturnBadRequestWhenUpdatingNonExistentStudent() {
         Student student = createTestStudent();
-
         when(studentService.editStudent(any(Student.class))).thenReturn(null);
 
         HttpEntity<Student> requestEntity = new HttpEntity<>(student);
@@ -135,7 +131,6 @@ class StudentControllerTest {
     @Test
     void shouldDeleteStudentSuccessfully() {
         Student deletedStudent = createTestStudent();
-
         when(studentService.deleteStudent(1L)).thenReturn(deletedStudent);
 
         ResponseEntity<Student> response = restTemplate.exchange(
@@ -167,7 +162,6 @@ class StudentControllerTest {
     @Test
     void shouldFilterStudentsByAgeSuccessfully() {
         List<Student> expectedStudents = List.of(createTestStudent());
-
         when(studentService.findByAge(17)).thenReturn(expectedStudents);
 
         ResponseEntity<List<Student>> response = restTemplate.exchange(
@@ -187,7 +181,6 @@ class StudentControllerTest {
     @Test
     void shouldFilterStudentsByAgeBetweenSuccessfully() {
         List<Student> expectedStudents = List.of(createTestStudent());
-
         when(studentService.findByAgeBetween(15, 20)).thenReturn(expectedStudents);
 
         ResponseEntity<List<Student>> response = restTemplate.exchange(
@@ -206,7 +199,6 @@ class StudentControllerTest {
     @Test
     void shouldReturnStudentFacultySuccessfully() {
         Faculty expectedFaculty = createTestFaculty();
-
         when(studentService.getStudentFaculty(1L)).thenReturn(expectedFaculty);
 
         ResponseEntity<Faculty> response = restTemplate.getForEntity(
@@ -221,19 +213,10 @@ class StudentControllerTest {
     }
 
     private Student createTestStudent() {
-        Student student = new Student();
-        student.setId(1L);
-        student.setName("Harry Potter");
-        student.setAge(17);
-        return student;
+        return new Student(1L,"Harry Potter",17);
     }
 
     private Faculty createTestFaculty() {
-        Faculty faculty = new Faculty();
-        faculty.setId(1L);
-        faculty.setName("Gryffindor");
-        faculty.setColor("red");
-        return faculty;
+        return new Faculty(1L,"Gryffindor","red");
     }
-
 }
