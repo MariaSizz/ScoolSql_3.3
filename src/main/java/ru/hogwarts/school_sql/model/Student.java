@@ -16,10 +16,12 @@ public class Student {
     @Column(name="age")
     private int age;
 
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+
 
     public Student() {
     }
