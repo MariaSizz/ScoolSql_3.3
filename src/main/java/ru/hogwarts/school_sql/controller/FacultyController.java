@@ -56,4 +56,9 @@ public class FacultyController {
         final List<Faculty> faculties = service.findByNameOrColor(query);
         return ResponseEntity.ok(faculties);
     }
+    @GetMapping("/longest-faculty-name")
+    public ResponseEntity<String> getLongestFacultyName(){
+        String facultyName = service.getLongestFacultyName();
+        return ResponseEntity.ok(facultyName);
+    }
 }

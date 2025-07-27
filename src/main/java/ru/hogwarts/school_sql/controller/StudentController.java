@@ -80,4 +80,16 @@ public class StudentController {
         return service.getLastFiveStudents();
     }
 
+    @GetMapping("/names-starting-with-a")
+    public List<String> findStudentsName(){return service.findStudentNamesStartingWithA();}
+    @GetMapping("/average-age-stream")
+    public ResponseEntity<Double> getAverageStudentAgeUsingStream() {
+        Double averageStudentAge = service.getAverageStudentAgeUsingStream();
+        return ResponseEntity.ok(averageStudentAge);
+    }
+    @GetMapping("/calculation-sum")
+    public ResponseEntity<Integer> calculationSum(){
+        int sum = service.calculationSum();
+        return ResponseEntity.ok(sum);
+    }
 }
