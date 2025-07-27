@@ -92,4 +92,12 @@ public class StudentController {
         int sum = service.calculationSum();
         return ResponseEntity.ok(sum);
     }
+    @GetMapping("/print-parallel")
+    public void printStudentParallel() {
+      service.printStudentsParallel();
+    }
+    @GetMapping("/print-synchronized")
+    public void printStudentSynchronized() {
+        service.printStudentsSynchronized();
+    }
 }

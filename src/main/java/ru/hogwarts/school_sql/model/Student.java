@@ -17,6 +17,9 @@ public class Student {
     private int age;
 
 
+//    private Long facultyId;
+
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")

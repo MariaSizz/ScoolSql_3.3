@@ -89,4 +89,40 @@ return repository.findAll().stream().map(Student::getName).map(String::toUpperCa
          logger.info("Was invoked method for calculation sum");
          return Stream.iterate(1, a -> a +1).limit(1_000_000).parallel().reduce(0, (a, b) -> a + b );
      }
+
+     public void printStudentsParallel(){
+         final List<Student> students = repository.findAll();
+         for (int i = 0; i < 2; i++) {
+             System.out.println("Основной поток " + students.get(i).getName());
+         }
+         new Thread(() ->{
+                          for (int i = 2; i < 4; i++) {
+                 System.out.println("1 параллельный поток " + students.get(i).getName());
+             }
+         }).start();
+         new Thread(() ->{
+             for (int i = 4; i < 6; i++) {
+                 System.out.println("2 параллельный поток " + students.get(i).getName());
+             }
+         }).start();
+     }
+    public void printStudentsSynchronized(){
+        final List<Student> students = repository.findAll();
+        for (int i = 0; i < 2; i++) {
+            printStudentNameSynchronized("Основной поток", students.get(i).getName());
+        }
+        new Thread(() ->{
+            for (int i = 2; i < 4; i++) {
+                printStudentNameSynchronized("1 параллельный поток", students.get(i).getName());
+            }
+        }).start();
+        new Thread(() ->{
+            for (int i = 4; i < 6; i++) {
+                printStudentNameSynchronized("2 параллельный поток", students.get(i).getName());
+            }
+        }).start();
+    }
+    private synchronized void printStudentNameSynchronized(String threadName, String studentName){
+        System.out.println(threadName + " " + studentName);
+    }
 }
