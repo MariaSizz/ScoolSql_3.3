@@ -24,7 +24,7 @@ public class AvatarService {
     private final AvatarRepository avatarRepository;
     private final StudentRepository studentRepository;
     private final String avatarsDir = "avatar";
-    private Logger logger = LoggerFactory.getLogger(AvatarService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     public AvatarService(AvatarRepository avatarRepository, StudentRepository studentRepository) {
         this.avatarRepository = avatarRepository;

@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class StudentService {
     private final StudentRepository repository;
-    private Logger logger = LoggerFactory.getLogger(StudentService.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     public StudentService(StudentRepository repository) {
         this.repository = repository;

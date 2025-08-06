@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class FacultyService {
      private final FacultyRepository repository;
-    private Logger logger = LoggerFactory.getLogger(FacultyService.class);
+    private static final Logger logger = LoggerFactory.getLogger(FacultyService.class);
      public FacultyService(FacultyRepository repository){
          this.repository = repository;
      }
