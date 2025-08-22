@@ -1,0 +1,13 @@
+ru\hogwarts\school_sql\service\FacultyService.class
+ru\hogwarts\school_sql\controller\FacultyController.class
+ru\hogwarts\school_sql\model\Faculty.class
+ru\hogwarts\school_sql\model\Student.class
+ru\hogwarts\school_sql\controller\StudentController.class
+ru\hogwarts\school_sql\repository\FacultyRepository.class
+ru\hogwarts\school_sql\model\Avatar.class
+ru\hogwarts\school_sql\service\StudentService.class
+ru\hogwarts\school_sql\service\AvatarService.class
+ru\hogwarts\school_sql\controller\AvatarController.class
+ru\hogwarts\school_sql\repository\AvatarRepository.class
+ru\hogwarts\school_sql\SchoolSql4Application.class
+ru\hogwarts\school_sql\repository\StudentRepository.class
